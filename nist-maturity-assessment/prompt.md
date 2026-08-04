@@ -69,7 +69,10 @@ As a `<data-expert>`, business intelligence and Chart.js:
   - Consider the maturity formula developed by `<cybersecurity-expert>` and display it according to definitions
 
 # Examples
-Consider the attached images as examples for the visualization style
+Consider the attached images as examples for the visualization style:
+  - [example-dashboard-1.png](example-dashboard-1.png)
+  - [example-dashboard-2.png](example-dashboard-2.png)
+  - [example-dashboard-3.png](example-dashboard-3.png)
 
 # Context
 The purpose of this document is to perform a NIST maturity assessment quickly and easily
@@ -88,3 +91,4 @@ The questions must allow a "Yes" or "No" answer, without creating doubts for the
 
 # Template
 Consider the attached excel document as the basis for questions and formulation style
+  - [nist-assessment-csf-2_0-example.xlsx](nist-assessment-csf-2_0-example.xlsx)
