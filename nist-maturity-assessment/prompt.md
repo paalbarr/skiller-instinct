@@ -3,7 +3,6 @@ name: niststat
 description: Create your own NIST Maturity evaluation artifacts
 version: 0.1.0
 ---
-
 # Action
 Develop an `excel` document that enables performing an assessment on NIST maturity under CSF 2.0
 
