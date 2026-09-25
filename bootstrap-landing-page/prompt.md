@@ -4,7 +4,7 @@ description: Create a simple landing page
 version: 0.1.0
 ---
 # Action
-Develop a Bootstrap-based landing page—without a build pipeline—for a product or project, following the brand guidelines, reference templates, and content brief provided
+Develop a Bootstrap-based` landing page—without a build pipeline—for a product or project, following the brand guidelines, reference templates, and content brief provided
 
 # Subject
 The website should consist of a simple and coherent content structure that avoids redundancy but also ensures no information is missing
@@ -42,7 +42,7 @@ The site must look and function correctly without any subsequent manual interven
 These instructions are intended for people without in-depth knowledge; interactions and questions should be clear
 
 # Constraints
-Respetar la siguiente estructura:
+Please follow this structure:
 
 ◆ index.html
 └ assets
@@ -70,4 +70,3 @@ Use the following screenshots as a starting point for the visual structure. They
 - example-page3.png
 - example-page4.png
 - example-page5.png
-
