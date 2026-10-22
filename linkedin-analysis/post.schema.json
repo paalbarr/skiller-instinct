@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/post.schema.json",
+  "title": "LinkedIn Post",
+  "description": "One post = post.md (front matter, references, content) + metrics.yml (results). Keeps the original field names.",
+  "type": "object",
+  "required": ["post"],
+  "additionalProperties": false,
+  "properties": {
+    "folder": {
+      "description": "Post folder name, e.g. 2026-09_la-capacidad-de-seguir-evolucionando.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}_[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "post": {
+      "description": "Content of post.md.",
+      "type": "object",
+      "required": ["front-matter", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "front-matter": { "$ref": "#/$defs/meta" },
+        "references": {
+          "description": "'# References' section: one URL per line.",
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "uniqueItems": true
+        },
+        "content": {
+          "description": "'# Content' section.",
+          "type": "object",
+          "required": ["text"],
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "description": "Post text in Markdown (opening, development, central question, closing), without the hashtag line.",
+              "type": "string",
+              "minLength": 1
+            },
+            "hashtags": {
+              "description": "Hashtags (inline code in the source), including the leading '#'.",
+              "type": "array",
+              "items": { "type": "string", "pattern": "^#\\S+$" },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "description": "Content of metrics.yml. Optional until results are measured.",
+      "type": "object",
+      "required": ["final-performance"],
+      "additionalProperties": false,
+      "properties": {
+        "front-matter": {
+          "description": "Fields repeated from the front matter to cross-reference both files; must match post.front-matter (not enforceable in JSON Schema).",
+          "$ref": "#/$defs/meta"
+        },
+        "final-performance": {
+          "type": "object",
+          "required": ["captured"],
+          "additionalProperties": false,
+          "properties": {
+            "captured": { "description": "Date the figures were captured, DD/MM/YYYY.", "$ref": "#/$defs/date" },
+            "members-reached": { "$ref": "#/$defs/count" },
+            "profile-viewers": { "$ref": "#/$defs/count" },
+            "followers-gained": { "$ref": "#/$defs/count" },
+            "impressions": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "total": { "$ref": "#/$defs/count" },
+                "in-network": { "$ref": "#/$defs/percentage" },
+                "out-of-network": { "$ref": "#/$defs/percentage" }
+              }
+            },
+            "engagement": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "reactions": { "$ref": "#/$defs/count" },
+                "comments": { "$ref": "#/$defs/count" },
+                "reposts": { "$ref": "#/$defs/count" },
+                "saves": { "$ref": "#/$defs/count" },
+                "sends": { "$ref": "#/$defs/count" },
+                "links-visits": { "$ref": "#/$defs/count" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "image-file": {
+      "description": "The .png file in the folder, referenced by 'image'.",
+      "type": "string",
+      "pattern": "^.+\\.png$"
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "required": ["ID", "title", "topic", "words", "published"],
+      "additionalProperties": false,
+      "properties": {
+        "ID": {
+          "description": "<YYYY-MM-DD>_<slug>, unique key.",
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}_[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": { "description": "Short post title.", "type": "string", "minLength": 1 },
+        "topic": {
+          "description": "Topics (a comma-separated list in the original YAML).",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "words": { "description": "Body length in words.", "type": "integer", "minimum": 0 },
+        "published": {
+          "description": "Publication date and time, DD/MM/YYYY HH:MM.",
+          "type": "string",
+          "pattern": "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/\\d{4} ([01]\\d|2[0-3]):[0-5]\\d$"
+        },
+        "post-url": { "description": "Link to the published post (lnkd.in).", "type": "string", "format": "uri" },
+        "image": { "description": "Name of the .png file that accompanies the post.", "type": "string", "pattern": "^.+\\.png$" }
+      }
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/\\d{4}$"
+    },
+    "count": { "type": "integer", "minimum": 0 },
+    "percentage": {
+      "description": "Percentage as text, e.g. '35%'.",
+      "type": "string",
+      "pattern": "^(100|[1-9]?\\d)(\\.\\d+)?%$"
+    }
+  }
+}

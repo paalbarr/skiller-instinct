@@ -10,6 +10,7 @@ Structured prompts for producing business deliverables with AI assistants. Each 
 | [`corporative-presentation`](corporative-presentation/prompt.md) | Capabilities presentation | PPTX + MD |
 | [`itil-service-catalog`](itil-service-catalog/prompt.md) | ITIL service catalog | XLSX |
 | [`iso27001-process`](iso27001-process/prompt.md) | ISO 27001 procedures | DOCX + BPMN + org chart |
+| [`linkedin-analysis`](linkedin-analysis/prompt.md) | Analysis for LinkedIn post performance | .md resume for LLM engines + JSON data + Chart.js dashboard |
 | [`nist-maturity-assessment`](nist-maturity-assessment/prompt.md) | NIST CSF 2.0 maturity assessment | XLSX + Chart.js dashboard |
 
 ## Usage
